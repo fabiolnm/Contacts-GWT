@@ -1,0 +1,49 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder 
+	xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:e="urn:import:com.google.gwt.editor.ui.client">
+
+	<ui:style>
+		.errorLabel {
+			font-weight: bold;
+			float: right;
+			color: red;
+		}
+		th {
+			text-align: right;
+		}
+	</ui:style>
+
+	<g:HTMLPanel>
+	<table>
+		<tr>
+			<th><ui:msg>Nome</ui:msg></th>
+			<td>
+				<e:ValueBoxEditorDecorator ui:field="nameEditor">
+					<e:valuebox><g:TextBox ui:field="name" /></e:valuebox>
+				</e:ValueBoxEditorDecorator>
+			</td>
+		</tr>
+		<tr>
+			<th><ui:msg>Tipo</ui:msg></th>
+			<td>
+				<e:ValueBoxEditorDecorator ui:field="typeEditor">
+				<e:valuebox><g:TextBox ui:field="type" /></e:valuebox>
+				</e:ValueBoxEditorDecorator>
+			</td>
+		</tr>
+		<tr>
+			<th><ui:msg>Número</ui:msg></th>
+			<td>
+				<e:ValueBoxEditorDecorator ui:field="numberEditor">
+				<e:valuebox><g:TextBox ui:field="number" /></e:valuebox>
+				</e:ValueBoxEditorDecorator>
+			</td>
+		</tr>
+		<tr><td colspan="2" align="right">
+			<g:Button ui:field="button"><ui:msg>Salvar</ui:msg></g:Button>
+		</td></tr>
+	</table>
+	</g:HTMLPanel>
+</ui:UiBinder>
