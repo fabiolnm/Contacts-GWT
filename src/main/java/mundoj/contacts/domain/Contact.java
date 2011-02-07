@@ -1,6 +1,7 @@
 package mundoj.contacts.domain;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +22,28 @@ public class Contact implements Comparable<Contact> {
 		id = ++genId;
 	}
 
-	// getters e setters omitidos
+	// getters e setters
+
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+	public void setNumber(String number) {
+		this.number = number;
+	}
 
 	// compareTo, usado para ordenar os contatos em um TreeSet.
 	@Override
@@ -79,8 +101,8 @@ public class Contact implements Comparable<Contact> {
 		return contacts.get(id);
 	}
 
-	public static Map<Integer, Contact> getAll() {
-		return Collections.unmodifiableMap(contacts);
+	public static Collection<Contact> getAll() {
+		return Collections.unmodifiableSet(new TreeSet<Contact>(contacts.values()));
 	}
 
 	public static List<Contact> filter(String value) {
