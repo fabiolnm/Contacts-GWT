@@ -4,6 +4,11 @@
 <module rename-to="contacts">
 	<source path="client" />
 	<source path="domain" />
+	
+	<inherits name="com.google.gwt.place.Place" />
+	<inherits name="com.google.gwt.activity.Activity" />
+	
 	<inherits name="mundoj.contacts.ui.ContactsUI" />
+	
 	<entry-point class="mundoj.contacts.client.Application" />
 </module>

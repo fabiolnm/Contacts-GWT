@@ -8,6 +8,7 @@ import mundoj.contacts.ui.client.edit.EditContactView;
 import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
@@ -35,10 +36,15 @@ public class SearchContactsView extends LazyPanel {
 	@UiField(provided = true) CellTable<Contact> contactsTable;
 	@UiField(provided = true) SimplePager pager;
 
+	private PlaceController placeController;
+	
 	private ListDataProvider<Contact> data;
 	private EditContactView editor;
 
-	public SearchContactsView(EditContactView editor) {
+	private boolean isLoading;
+
+	public SearchContactsView(PlaceController placeController, EditContactView editor) {
+		this.placeController = placeController;
 		this.editor = editor;
 	}
 
@@ -50,7 +56,7 @@ public class SearchContactsView extends LazyPanel {
 
 	@UiHandler("button")
 	void onClick(ClickEvent e) {
-		update(Contact.filter(keyword.getValue()));
+		placeController.goTo(new SearchContactsPlace(keyword.getValue()));
 	}
 	
 	public void update(Collection<Contact> contacts) {
@@ -58,6 +64,20 @@ public class SearchContactsView extends LazyPanel {
 		contactsTable.setRowCount(contacts.size());
 		data.getList().clear();
 		data.getList().addAll(contacts);
+		isLoading = false;
+	}
+
+	public void startLoading(String keyword) {
+		isLoading = true;
+		ensureWidget();
+		pager.firstPage();
+		pager.startLoading();
+		contactsTable.setRowCount(1);
+		this.keyword.setValue(keyword);
+	}
+
+	public boolean isLoading() {
+		return isLoading;
 	}
 
 	private CellTable<Contact> initContactsTable() {
