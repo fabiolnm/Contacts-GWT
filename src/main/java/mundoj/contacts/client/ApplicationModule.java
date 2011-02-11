@@ -1,11 +1,9 @@
 package mundoj.contacts.client;
 
-import mundoj.contacts.ui.client.edit.EditContactActivity;
+import mundoj.contacts.ui.client.edit.EditContactActivityFactory;
 import mundoj.contacts.ui.client.edit.EditContactPlace;
-import mundoj.contacts.ui.client.edit.EditContactView;
-import mundoj.contacts.ui.client.search.SearchContactsActivity;
+import mundoj.contacts.ui.client.search.SearchContactsActivityFactory;
 import mundoj.contacts.ui.client.search.SearchContactsPlace;
-import mundoj.contacts.ui.client.search.SearchContactsView;
 
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityManager;
@@ -42,23 +40,21 @@ public class ApplicationModule extends AbstractGinModule {
 	
 	@Provides 
 	@Singleton
-	public ActivityManager activityManager(final EventBus eventBus, 
-			final SearchContactsView searchView, final EditContactView editView) {
+	public ActivityManager activityManager(final EventBus eventBus,
+			SearchContactsActivityFactory searchContactsFactory,
+			EditContactActivityFactory editContactFactory) {
 		return new ActivityManager(new ActivityMapper() {
 			@Override
 			public final Activity getActivity(Place place) {
-				if (place instanceof SearchContactsPlace)
-					return new SearchContactsActivity(searchView, (SearchContactsPlace) place);
-				else if (place instanceof EditContactPlace)
-					return new EditContactActivity(editView, (EditContactPlace) place);
-				return null;
+				ActivityRequestEvent event = new ActivityRequestEvent(place);
+				eventBus.fireEvent(event);
+				return event.getActivity();
 			}
 		}, eventBus);
 	}
 
 	@WithTokenizers({
-		SearchContactsPlace.Tokenizer.class,
-		EditContactPlace.Tokenizer.class
+		SearchContactsPlace.Tokenizer.class, EditContactPlace.Tokenizer.class
 	})
 	interface ContactsHistoryMapper extends PlaceHistoryMapper { }
 	
