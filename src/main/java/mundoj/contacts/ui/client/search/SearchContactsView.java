@@ -26,6 +26,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
+import com.google.inject.Inject;
 
 public class SearchContactsView extends LazyPanel {
 	interface ContactSearchUiBinder extends	UiBinder<Widget, SearchContactsView> { }
@@ -43,6 +44,7 @@ public class SearchContactsView extends LazyPanel {
 
 	private boolean isLoading;
 
+	@Inject
 	public SearchContactsView(PlaceController placeController, EditContactView editor) {
 		this.placeController = placeController;
 		this.editor = editor;

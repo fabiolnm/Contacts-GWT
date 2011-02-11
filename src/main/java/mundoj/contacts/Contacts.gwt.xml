@@ -5,6 +5,7 @@
 	<source path="client" />
 	<source path="domain" />
 	
+	<inherits name="com.google.gwt.inject.Inject" />
 	<inherits name="com.google.gwt.place.Place" />
 	<inherits name="com.google.gwt.activity.Activity" />
 	
