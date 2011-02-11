@@ -3,7 +3,7 @@ package mundoj.contacts.ui.client.search;
 import java.util.Collection;
 
 import mundoj.contacts.domain.Contact;
-import mundoj.contacts.ui.client.edit.EditContactView;
+import mundoj.contacts.ui.client.edit.EditContactPlace;
 
 import com.google.gwt.cell.client.AbstractCell;
 import com.google.gwt.core.client.GWT;
@@ -40,14 +40,12 @@ public class SearchContactsView extends LazyPanel {
 	private PlaceController placeController;
 	
 	private ListDataProvider<Contact> data;
-	private EditContactView editor;
 
 	private boolean isLoading;
 
 	@Inject
-	public SearchContactsView(PlaceController placeController, EditContactView editor) {
+	public SearchContactsView(PlaceController placeController) {
 		this.placeController = placeController;
-		this.editor = editor;
 	}
 
 	@Override
@@ -70,8 +68,8 @@ public class SearchContactsView extends LazyPanel {
 	}
 
 	public void startLoading(String keyword) {
-		isLoading = true;
 		ensureWidget();
+		isLoading = true;
 		pager.firstPage();
 		pager.startLoading();
 		contactsTable.setRowCount(1);
@@ -116,7 +114,7 @@ public class SearchContactsView extends LazyPanel {
 			@Override
 			public void onSelectionChange(SelectionChangeEvent event) {
 				setVisible(false);
-				editor.bind(selectionModel.getSelectedObject());
+				placeController.goTo(new EditContactPlace(selectionModel.getSelectedObject().id));
 			}
 		});
 		contactsTable.setSelectionModel(selectionModel);

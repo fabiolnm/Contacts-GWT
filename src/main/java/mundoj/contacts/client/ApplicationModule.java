@@ -1,5 +1,8 @@
 package mundoj.contacts.client;
 
+import mundoj.contacts.ui.client.edit.EditContactActivity;
+import mundoj.contacts.ui.client.edit.EditContactPlace;
+import mundoj.contacts.ui.client.edit.EditContactView;
 import mundoj.contacts.ui.client.search.SearchContactsActivity;
 import mundoj.contacts.ui.client.search.SearchContactsPlace;
 import mundoj.contacts.ui.client.search.SearchContactsView;
@@ -39,18 +42,24 @@ public class ApplicationModule extends AbstractGinModule {
 	
 	@Provides 
 	@Singleton
-	public ActivityManager activityManager(final EventBus eventBus, final SearchContactsView searchView) {
+	public ActivityManager activityManager(final EventBus eventBus, 
+			final SearchContactsView searchView, final EditContactView editView) {
 		return new ActivityManager(new ActivityMapper() {
 			@Override
 			public final Activity getActivity(Place place) {
 				if (place instanceof SearchContactsPlace)
 					return new SearchContactsActivity(searchView, (SearchContactsPlace) place);
+				else if (place instanceof EditContactPlace)
+					return new EditContactActivity(editView, (EditContactPlace) place);
 				return null;
 			}
 		}, eventBus);
 	}
 
-	@WithTokenizers(SearchContactsPlace.Tokenizer.class)
+	@WithTokenizers({
+		SearchContactsPlace.Tokenizer.class,
+		EditContactPlace.Tokenizer.class
+	})
 	interface ContactsHistoryMapper extends PlaceHistoryMapper { }
 	
 	@Provides 

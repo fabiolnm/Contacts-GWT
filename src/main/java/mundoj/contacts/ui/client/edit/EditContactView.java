@@ -1,6 +1,7 @@
 package mundoj.contacts.ui.client.edit;
 
 import mundoj.contacts.domain.Contact;
+import mundoj.contacts.ui.client.LoadingSplash;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
@@ -30,12 +31,14 @@ public class EditContactView extends LazyPanel implements Editor<Contact> {
 
 	@Override
 	protected Widget createWidget() {
-		return uiBinder.createAndBindUi(this);
+		Widget w = uiBinder.createAndBindUi(this);;
+		driver.initialize(this);
+		return w;
 	}
 
 	public void bind(Contact c) {
+		LoadingSplash.close();
 		setVisible(true);
-		driver.initialize(this);
 		driver.edit(c);
 	}
 
@@ -62,5 +65,14 @@ public class EditContactView extends LazyPanel implements Editor<Contact> {
 			d.center();
 			d.show();
 		}
+	}
+
+	public void startLoading(String loadingMessage) {
+		setVisible(false);
+		LoadingSplash.display(loadingMessage);
+	}
+
+	public boolean hasChanges() {
+		return false;
 	}
 }

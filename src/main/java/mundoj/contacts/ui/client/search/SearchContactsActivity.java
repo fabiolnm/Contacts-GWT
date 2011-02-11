@@ -23,7 +23,10 @@ public class SearchContactsActivity extends AbstractActivity {
 	public void start(final AcceptsOneWidget panel, EventBus eventBus) {
 		panel.setWidget(view);
 		view.startLoading(place.keyword);
-		
+		searchContacts();
+	}
+
+	private void searchContacts() {
 		// timer = emula delay em uma chamada cliente-servidor
 		currentTimer = new Timer() {
 			@Override
