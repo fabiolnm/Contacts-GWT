@@ -12,7 +12,9 @@ import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 
 public class Application implements EntryPoint {
-	@GinModules(ApplicationModule.class)
+	@GinModules({
+		ApplicationModule.class, ServiceModule.class
+	})
 	public interface Injector extends Ginjector {
 		ActivityManager activityManager();
 
