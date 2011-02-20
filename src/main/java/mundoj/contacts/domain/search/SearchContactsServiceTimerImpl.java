@@ -13,7 +13,7 @@ public class SearchContactsServiceTimerImpl implements SearchContactsService {
 
 	@Override
 	public void searchContacts(final String keyword, 
-		final ServiceCallback<List<IContact>> serviceCallback) {
+		final ServiceCallback<List<? extends IContact>> serviceCallback) {
 		// timer = emula delay em uma chamada cliente-servidor
 		currentTimer = new Timer() {
 			@Override

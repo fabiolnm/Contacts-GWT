@@ -6,7 +6,7 @@ import mundoj.contacts.domain.IContact;
 import mundoj.contacts.domain.ServiceCallback;
 
 public interface SearchContactsService {
-	void searchContacts(String keyword, ServiceCallback<List<IContact>> serviceCallback);
+	void searchContacts(String keyword, ServiceCallback<List<? extends IContact>> serviceCallback);
 
 	void cancelCurrentCallback();
 }

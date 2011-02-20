@@ -44,9 +44,9 @@ public class SearchContactsActivityFactory extends AbstractActivityFactory<Searc
 		}
 
 		private void searchContacts() {
-			service.searchContacts(place.keyword, new ServiceCallback<List<IContact>>() {
+			service.searchContacts(place.keyword, new ServiceCallback<List<? extends IContact>>() {
 				@Override
-				public void execute(List<IContact> contacts) {
+				public void execute(List<? extends IContact> contacts) {
 					view.update(contacts);
 				}
 			});

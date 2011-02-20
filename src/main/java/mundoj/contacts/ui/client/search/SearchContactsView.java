@@ -59,7 +59,7 @@ public class SearchContactsView extends LazyPanel {
 		placeController.goTo(new SearchContactsPlace(keyword.getValue()));
 	}
 	
-	public void update(Collection<IContact> contacts) {
+	public void update(Collection<? extends IContact> contacts) {
 		setVisible(true);
 		contactsTable.setRowCount(contacts.size());
 		data.getList().clear();
