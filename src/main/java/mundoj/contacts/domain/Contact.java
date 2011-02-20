@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.TreeSet;
 
-public class Contact implements Comparable<Contact> {
-	public final Integer id;
+public class Contact implements Comparable<Contact>, IContact {
+	private Integer id;
 	private String name, type, number;
 
 	private static int genId;
@@ -22,7 +22,12 @@ public class Contact implements Comparable<Contact> {
 	}
 
 	// getters e setters
+	@Override
+	public Integer getId() {
+		return id;
+	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -30,6 +35,7 @@ public class Contact implements Comparable<Contact> {
 		this.name = name;
 	}
 
+	@Override
 	public String getType() {
 		return type;
 	}
@@ -37,6 +43,7 @@ public class Contact implements Comparable<Contact> {
 		this.type = type;
 	}
 
+	@Override
 	public String getNumber() {
 		return number;
 	}
@@ -104,7 +111,7 @@ public class Contact implements Comparable<Contact> {
 		return Collections.unmodifiableSet(new TreeSet<Contact>(contacts.values()));
 	}
 
-	public static List<Contact> filter(String value) {
+	public static List<IContact> filter(String value) {
 		TreeSet<Contact> res = new TreeSet<Contact>(); // TreeSet para ordenar contatos filtrados
 
 		if (value == null || value.isEmpty())
@@ -120,7 +127,7 @@ public class Contact implements Comparable<Contact> {
 					res.add(c);
 			}
 		}
-		return new ArrayList<Contact>(res);
+		return new ArrayList<IContact>(res);
 	}
 
 	private static final HashMap<Integer, Contact> contacts = generate();

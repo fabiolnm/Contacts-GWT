@@ -3,7 +3,7 @@ package mundoj.contacts.ui.client.search;
 import java.util.List;
 
 import mundoj.contacts.client.AbstractActivityFactory;
-import mundoj.contacts.domain.Contact;
+import mundoj.contacts.domain.IContact;
 import mundoj.contacts.domain.ServiceCallback;
 import mundoj.contacts.domain.search.SearchContactsService;
 
@@ -44,9 +44,9 @@ public class SearchContactsActivityFactory extends AbstractActivityFactory<Searc
 		}
 
 		private void searchContacts() {
-			service.searchContacts(place.keyword, new ServiceCallback<List<Contact>>() {
+			service.searchContacts(place.keyword, new ServiceCallback<List<IContact>>() {
 				@Override
-				public void execute(List<Contact> contacts) {
+				public void execute(List<IContact> contacts) {
 					view.update(contacts);
 				}
 			});

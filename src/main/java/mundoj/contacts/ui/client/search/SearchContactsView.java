@@ -2,7 +2,7 @@ package mundoj.contacts.ui.client.search;
 
 import java.util.Collection;
 
-import mundoj.contacts.domain.Contact;
+import mundoj.contacts.domain.IContact;
 import mundoj.contacts.ui.client.edit.EditContactPlace;
 
 import com.google.gwt.cell.client.AbstractCell;
@@ -34,12 +34,12 @@ public class SearchContactsView extends LazyPanel {
 
 	@UiField TextBox keyword;
 	@UiField Button button;
-	@UiField(provided = true) CellTable<Contact> contactsTable;
+	@UiField(provided = true) CellTable<IContact> contactsTable;
 	@UiField(provided = true) SimplePager pager;
 
 	private PlaceController placeController;
 	
-	private ListDataProvider<Contact> data;
+	private ListDataProvider<IContact> data;
 
 	private boolean isLoading;
 
@@ -59,7 +59,7 @@ public class SearchContactsView extends LazyPanel {
 		placeController.goTo(new SearchContactsPlace(keyword.getValue()));
 	}
 	
-	public void update(Collection<Contact> contacts) {
+	public void update(Collection<IContact> contacts) {
 		setVisible(true);
 		contactsTable.setRowCount(contacts.size());
 		data.getList().clear();
@@ -80,41 +80,41 @@ public class SearchContactsView extends LazyPanel {
 		return isLoading;
 	}
 
-	private CellTable<Contact> initContactsTable() {
-		contactsTable = new CellTable<Contact>();
+	private CellTable<IContact> initContactsTable() {
+		contactsTable = new CellTable<IContact>();
 		HighlightCell highlightKeyword = new HighlightCell();
-		contactsTable.addColumn(new Column<Contact, String>(highlightKeyword) {
+		contactsTable.addColumn(new Column<IContact, String>(highlightKeyword) {
 			public @Override
-			String getValue(Contact c) {
+			String getValue(IContact c) {
 				return c.getName();
 			}
 		}, "Nome");
-		contactsTable.addColumn(new Column<Contact, String>(highlightKeyword) {
+		contactsTable.addColumn(new Column<IContact, String>(highlightKeyword) {
 			public @Override
-			String getValue(Contact c) {
+			String getValue(IContact c) {
 				return c.getType();
 			}
 		}, "Tipo");
-		contactsTable.addColumn(new Column<Contact, String>(highlightKeyword) {
+		contactsTable.addColumn(new Column<IContact, String>(highlightKeyword) {
 			public @Override
-			String getValue(Contact c) {
+			String getValue(IContact c) {
 				return c.getNumber();
 			}
 		}, "Número");
 
-		data = new ListDataProvider<Contact>();
+		data = new ListDataProvider<IContact>();
 		data.addDataDisplay(contactsTable);
 
 		SimplePager.Resources pagerResources = GWT.create(SimplePager.Resources.class);
 		pager = new SimplePager(TextLocation.CENTER, pagerResources, false, 0, true);
 		pager.setDisplay(contactsTable);
 		
-		final SingleSelectionModel<Contact> selectionModel = new SingleSelectionModel<Contact>();
+		final SingleSelectionModel<IContact> selectionModel = new SingleSelectionModel<IContact>();
 		selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 			@Override
 			public void onSelectionChange(SelectionChangeEvent event) {
 				setVisible(false);
-				placeController.goTo(new EditContactPlace(selectionModel.getSelectedObject().id));
+				placeController.goTo(new EditContactPlace(selectionModel.getSelectedObject().getId()));
 			}
 		});
 		contactsTable.setSelectionModel(selectionModel);
