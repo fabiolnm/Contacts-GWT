@@ -63,7 +63,7 @@ public abstract class JsonRequest {
 		return list;
 	}
 
-	private final native JavaScriptObject eval(String json)/*-{
+	protected final native<T extends JavaScriptObject> T eval(String json)/*-{
 		return eval("(" + json + ")");
 	}-*/;
 }
