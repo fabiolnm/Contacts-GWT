@@ -9,7 +9,7 @@ import java.util.Random;
 import java.util.TreeSet;
 
 public class Contact implements Comparable<Contact>, IContact {
-	private Integer id;
+	private int id;
 	private String name, type, number;
 
 	private static int genId;
@@ -60,7 +60,7 @@ public class Contact implements Comparable<Contact>, IContact {
 			if (cmp == 0)
 				cmp = number.compareTo(o.number);
 		}
-		return cmp == 0 ? id.compareTo(o.id) : cmp;
+		return cmp == 0 ? new Integer(id).compareTo(o.id) : cmp;
 	}
 
 	// lista de nomes, usados para gerar uma lista randômica de contatos
@@ -105,6 +105,11 @@ public class Contact implements Comparable<Contact>, IContact {
 
 	public static Contact get(Integer id) {
 		return contacts.get(id);
+	}
+
+	public static Contact update(Contact c) {
+		contacts.put(c.getId(), c);
+		return c;
 	}
 
 	public static Collection<Contact> getAll() {

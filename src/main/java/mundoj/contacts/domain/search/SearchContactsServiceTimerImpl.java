@@ -14,6 +14,9 @@ public class SearchContactsServiceTimerImpl implements SearchContactsService {
 	@Override
 	public void searchContacts(final String keyword, 
 		final ServiceCallback<List<? extends IContact>> serviceCallback) {
+		
+		cancelCurrentCallback();
+		
 		// timer = emula delay em uma chamada cliente-servidor
 		currentTimer = new Timer() {
 			@Override
@@ -26,6 +29,7 @@ public class SearchContactsServiceTimerImpl implements SearchContactsService {
 
 	@Override
 	public void cancelCurrentCallback() {
-		currentTimer.cancel();
+		if (currentTimer!=null)
+			currentTimer.cancel();
 	}
 }

@@ -1,21 +1,24 @@
 package mundoj.contacts.ui.client.edit;
 
+import mundoj.contacts.client.AbstractActivityFactory;
+import mundoj.contacts.domain.IContact;
+import mundoj.contacts.domain.ServiceCallback;
+import mundoj.contacts.domain.edit.EditContactService;
+
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
 
-import mundoj.contacts.client.AbstractActivityFactory;
-import mundoj.contacts.domain.Contact;
-
 public class EditContactActivityFactory extends AbstractActivityFactory<EditContactPlace> {
 	private final EditContactView editor;
+	private final EditContactService service;
 
 	@Inject
-	protected EditContactActivityFactory(EventBus eventBus, EditContactView editor) {
+	protected EditContactActivityFactory(EventBus eventBus, EditContactService service, EditContactView editor) {
 		super(eventBus);
+		this.service = service;
 		this.editor = editor;
 	}
 
@@ -34,19 +37,19 @@ public class EditContactActivityFactory extends AbstractActivityFactory<EditCont
 		@Override
 		public void start(final AcceptsOneWidget panel, EventBus eventBus) {
 			panel.setWidget(editor);
-			editContact();
-		}
-
-		private void editContact() {
 			editor.startLoading("Carregando dados do usuário");
-			// emula carregamento dos dados de um usuário, para edição
-			new Timer() {
-				public void run() {	
-					editor.bind(Contact.get(place.contactId));	
-				}
-			}.schedule(1000);
+			editContact(place.contactId);
 		}
 
+		private void editContact(int id) {
+			service.edit(id, new ServiceCallback<IContact>() {
+				@Override
+				public void execute(IContact contact) {
+					editor.bind(contact);
+				}
+			});
+		}
+		
 		public String mayStop() {
 			return editor.hasChanges() ? "Descartar Alterações?" : null;
 		}

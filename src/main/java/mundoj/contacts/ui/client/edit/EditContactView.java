@@ -1,6 +1,6 @@
 package mundoj.contacts.ui.client.edit;
 
-import mundoj.contacts.domain.Contact;
+import mundoj.contacts.domain.IContact;
 import mundoj.contacts.ui.client.LoadingSplash;
 
 import com.google.gwt.core.client.GWT;
@@ -18,11 +18,11 @@ import com.google.gwt.user.client.ui.LazyPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
-public class EditContactView extends LazyPanel implements Editor<Contact> {
+public class EditContactView extends LazyPanel implements Editor<IContact> {
 	interface ContactEditorUiBinder extends UiBinder<Widget, EditContactView> {	}
 	private final ContactEditorUiBinder uiBinder = GWT.create(ContactEditorUiBinder.class);
 
-	static interface Driver extends SimpleBeanEditorDriver<Contact, EditContactView> { }
+	static interface Driver extends SimpleBeanEditorDriver<IContact, EditContactView> { }
 	private final Driver driver = GWT.create(Driver.class);
 
 	@UiField TextBox name, type, number;
@@ -36,7 +36,7 @@ public class EditContactView extends LazyPanel implements Editor<Contact> {
 		return w;
 	}
 
-	public void bind(Contact c) {
+	public void bind(IContact c) {
 		LoadingSplash.close();
 		setVisible(true);
 		driver.edit(c);
