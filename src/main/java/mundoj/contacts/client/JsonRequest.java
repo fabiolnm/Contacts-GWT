@@ -19,11 +19,11 @@ public abstract class JsonRequest {
 	private String data = "";
 
 	public void get(String url) {
-		execute(RequestBuilder.GET, url);
+		execute(RequestBuilder.GET, url + "?" + data, null);
 	}
 	
 	public JsonRequest with(String key, String value) {
-		data += "&" + key + "=" + value;
+		data += key + "=" + value + "&";
 		return this;
 	}
 
@@ -31,9 +31,9 @@ public abstract class JsonRequest {
 		cancelled = true;
 	}
 
-	private void execute(RequestBuilder.Method method, String url) {
+	private void execute(RequestBuilder.Method method, String url, String requestBody) {
 		try {
-			new RequestBuilder(method, url).sendRequest(data, new RequestCallback() {
+			new RequestBuilder(method, url).sendRequest(requestBody, new RequestCallback() {
 				public void onError(Request request, Throwable exception) {
 					if (!cancelled)
 						callback(exception);

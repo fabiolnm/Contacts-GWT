@@ -114,7 +114,8 @@ public class SearchContactsView extends LazyPanel {
 			@Override
 			public void onSelectionChange(SelectionChangeEvent event) {
 				setVisible(false);
-				placeController.goTo(new EditContactPlace(selectionModel.getSelectedObject().getId()));
+				IContact contact = selectionModel.getSelectedObject();
+				placeController.goTo(new EditContactPlace(contact.getId()));
 			}
 		});
 		contactsTable.setSelectionModel(selectionModel);

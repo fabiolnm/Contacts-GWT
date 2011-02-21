@@ -23,7 +23,7 @@ public class Contact implements Comparable<Contact>, IContact {
 
 	// getters e setters
 	@Override
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -111,19 +111,19 @@ public class Contact implements Comparable<Contact>, IContact {
 		return Collections.unmodifiableSet(new TreeSet<Contact>(contacts.values()));
 	}
 
-	public static List<IContact> filter(String value) {
+	public static List<IContact> filter(String keyword) {
 		TreeSet<Contact> res = new TreeSet<Contact>(); // TreeSet para ordenar contatos filtrados
 
-		if (value == null || value.isEmpty())
+		if (keyword == null || keyword.isEmpty())
 			res.addAll(contacts.values());
 		else {
-			value = value.toLowerCase();
+			keyword = keyword.toLowerCase();
 			for (Contact c : contacts.values()) {
-				if (c.name.toLowerCase().contains(value))
+				if (c.name.toLowerCase().contains(keyword))
 					res.add(c);
-				else if (c.type.toLowerCase().contains(value))
+				else if (c.type.toLowerCase().contains(keyword))
 					res.add(c);
-				else if (c.number.toLowerCase().contains(value))
+				else if (c.number.toLowerCase().contains(keyword))
 					res.add(c);
 			}
 		}

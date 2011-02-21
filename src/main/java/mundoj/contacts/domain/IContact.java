@@ -1,7 +1,7 @@
 package mundoj.contacts.domain;
 
 public interface IContact {
-	Integer getId();
+	int getId();
 	String getName();
 	String getType();
 	String getNumber();

@@ -6,7 +6,7 @@ public class ContactJso extends JavaScriptObject implements IContact {
 	protected ContactJso() { }
 
 	@Override
-	public final native Integer getId()/*-{
+	public final native int getId()/*-{
 		return this.id;
 	}-*/;
 

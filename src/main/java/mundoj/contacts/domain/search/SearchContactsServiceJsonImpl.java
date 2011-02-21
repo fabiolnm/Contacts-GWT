@@ -27,7 +27,7 @@ public class SearchContactsServiceJsonImpl implements SearchContactsService {
 				Window.alert(e.getMessage());
 			}
 		};
-		currentRequest.with("keyword", keyword).get("/contact/list");
+		currentRequest.with("keyword", keyword).get("/json/contact/list");
 	}
 	
 	@Override
