@@ -1,19 +1,26 @@
 package mundoj.contacts.domain.edit;
 
-import com.google.gwt.user.client.Window;
-
 import mundoj.contacts.client.JsonRequest;
 import mundoj.contacts.domain.ContactJso;
-import mundoj.contacts.domain.IContact;
 import mundoj.contacts.domain.ServiceCallback;
 
-public class EditContactServiceJsonImpl implements EditContactService {
+import com.google.gwt.user.client.Window;
+
+public class EditContactServiceJsonImpl implements EditContactService<ContactJso> {
 	private JsonRequest currentRequest;
 	
 	@Override
-	public void edit(int id, final ServiceCallback<IContact> serviceCallback) {
+	public void edit(int id, final ServiceCallback<ContactJso> serviceCallback) {
+		buildRequest(serviceCallback).get("/json/contact/edit/" + id);
+	}
+
+	@Override
+	public void save(ContactJso contact, ServiceCallback<ContactJso> serviceCallback) {
+		buildRequest(serviceCallback).post("/json/contact/save", contact);
+	}
+
+	private JsonRequest buildRequest(final ServiceCallback<ContactJso> serviceCallback) {
 		cancelCurrentCallback();
-		
 		currentRequest = new JsonRequest() {
 			@Override
 			public void callback(Throwable e) {
@@ -26,7 +33,7 @@ public class EditContactServiceJsonImpl implements EditContactService {
 				serviceCallback.execute(contact);
 			}
 		};
-		currentRequest.get("/json/contact/edit/" + id);
+		return currentRequest;
 	}
 
 	@Override

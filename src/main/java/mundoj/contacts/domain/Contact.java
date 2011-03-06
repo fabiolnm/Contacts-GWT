@@ -14,6 +14,8 @@ public class Contact implements Comparable<Contact>, IContact {
 
 	private static int genId;
 
+	Contact() { }
+	
 	Contact(String name, String type, String number) {
 		this.name = name;
 		this.type = type;
@@ -25,6 +27,9 @@ public class Contact implements Comparable<Contact>, IContact {
 	@Override
 	public int getId() {
 		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	@Override
@@ -107,7 +112,7 @@ public class Contact implements Comparable<Contact>, IContact {
 		return contacts.get(id);
 	}
 
-	public static Contact update(Contact c) {
+	public static Contact save(Contact c) {
 		contacts.put(c.getId(), c);
 		return c;
 	}
