@@ -27,13 +27,19 @@ public abstract class JsonRequest {
 		return this;
 	}
 
+	public void post(String url, JavaScriptObject jso) {
+		execute(RequestBuilder.POST, url + "?" + data, toJsonString(jso));
+	}
+
 	public void cancel() {
 		cancelled = true;
 	}
 
 	private void execute(RequestBuilder.Method method, String url, String requestBody) {
 		try {
-			new RequestBuilder(method, url).sendRequest(requestBody, new RequestCallback() {
+			RequestBuilder req = new RequestBuilder(method, url);
+			req.setHeader("Content-Type", "application/json");
+			req.sendRequest(requestBody, new RequestCallback() {
 				public void onError(Request request, Throwable exception) {
 					if (!cancelled)
 						callback(exception);
@@ -65,5 +71,14 @@ public abstract class JsonRequest {
 
 	protected final native<T extends JavaScriptObject> T eval(String json)/*-{
 		return eval("(" + json + ")");
+	}-*/;
+
+	protected final native String toJsonString(JavaScriptObject jso)/*-{
+		return JSON.stringify(jso, function(key, value) {
+			var excludeField; // let it undefined!
+		    if (key=='$H')
+		        return excludeField;
+		    return value;
+		});
 	}-*/;
 }
