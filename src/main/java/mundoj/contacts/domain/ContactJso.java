@@ -5,6 +5,10 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class ContactJso extends JavaScriptObject implements IContact {
 	protected ContactJso() { }
 
+	public static final native ContactJso newInstance()/*-{
+		return eval('{}');
+	}-*/;
+
 	@Override
 	public final native int getId()/*-{
 		return this.id;

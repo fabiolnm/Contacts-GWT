@@ -63,7 +63,6 @@ public class EditContactView extends LazyPanel implements Editor<IContact> {
 			numberEditor.asEditor().getDelegate().recordError(requiredMsg, null, null);
 
 		IContact contact = driver.flush();
-		GWT.log(contact.getNumber());
 		if (!driver.hasErrors())
 			eventBus.fireEvent(new SaveContactEvent(contact));
 	}
