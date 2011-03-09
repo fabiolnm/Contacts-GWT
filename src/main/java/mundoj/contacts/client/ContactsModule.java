@@ -20,7 +20,7 @@ import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
 public class ContactsModule extends AbstractGinModule {
-	public static final String CONTACTS_HISTORY_HANDLER = "contactsHistoryHandler";
+	public static final String HISTORY_HANDLER = "contactsHistoryHandler";
 
 	@WithTokenizers({
 		SearchContactsPlace.Tokenizer.class, EditContactPlace.Tokenizer.class
@@ -29,7 +29,7 @@ public class ContactsModule extends AbstractGinModule {
 	
 	@Provides 
 	@Singleton 
-	@Named(CONTACTS_HISTORY_HANDLER)
+	@Named(HISTORY_HANDLER)
 	public PlaceHistoryHandler contactsHistoryHandler(EventBus eventBus, 
 			PlaceController placeController, ContactsHistoryMapper contactsMapper,
 			SearchContactsActivityFactory searchContactsFactory,

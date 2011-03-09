@@ -21,7 +21,7 @@ public class Application implements EntryPoint {
 	public interface Injector extends Ginjector {
 		ActivityManager activityManager();
 
-		@Named(ContactsModule.CONTACTS_HISTORY_HANDLER)
+		@Named(ContactsModule.HISTORY_HANDLER)
 		PlaceHistoryHandler historyHandler();
 	}
 	private Injector injector = GWT.create(Injector.class);
