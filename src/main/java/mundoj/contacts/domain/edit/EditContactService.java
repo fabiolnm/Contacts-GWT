@@ -1,7 +1,7 @@
 package mundoj.contacts.domain.edit;
 
+import mundoj.commons.client.ServiceCallback;
 import mundoj.contacts.domain.IContact;
-import mundoj.contacts.domain.ServiceCallback;
 
 public interface EditContactService<C extends IContact> {
 	void edit(int id, ServiceCallback<C> serviceCallback);

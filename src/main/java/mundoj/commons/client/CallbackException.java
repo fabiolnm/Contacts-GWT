@@ -1,4 +1,4 @@
-package mundoj.contacts.client;
+package mundoj.commons.client;
 
 public class CallbackException extends Exception {
 	public final int status;

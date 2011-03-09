@@ -2,9 +2,9 @@ package mundoj.contacts.domain.search;
 
 import java.util.List;
 
+import mundoj.commons.client.ServiceCallback;
 import mundoj.contacts.domain.Contact;
 import mundoj.contacts.domain.IContact;
-import mundoj.contacts.domain.ServiceCallback;
 
 import com.google.gwt.user.client.Timer;
 

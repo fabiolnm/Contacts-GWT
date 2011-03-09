@@ -2,6 +2,8 @@ package mundoj.contacts.client;
 
 import javax.inject.Named;
 
+import mundoj.commons.client.ApplicationModule;
+
 
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.core.client.EntryPoint;

@@ -1,7 +1,7 @@
 package mundoj.contacts.domain.edit;
 
+import mundoj.commons.client.ServiceCallback;
 import mundoj.contacts.domain.Contact;
-import mundoj.contacts.domain.ServiceCallback;
 
 import com.google.gwt.user.client.Timer;
 

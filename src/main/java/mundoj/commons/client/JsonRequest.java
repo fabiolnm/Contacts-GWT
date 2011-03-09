@@ -1,4 +1,4 @@
-package mundoj.contacts.client;
+package mundoj.commons.client;
 
 import java.util.ArrayList;
 import java.util.List;

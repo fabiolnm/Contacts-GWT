@@ -1,8 +1,8 @@
 package mundoj.contacts.ui.client.edit;
 
-import mundoj.contacts.client.AbstractActivityFactory;
+import mundoj.commons.client.AbstractActivityFactory;
+import mundoj.commons.client.ServiceCallback;
 import mundoj.contacts.domain.IContact;
-import mundoj.contacts.domain.ServiceCallback;
 import mundoj.contacts.domain.edit.EditContactService;
 
 import com.google.gwt.activity.shared.AbstractActivity;

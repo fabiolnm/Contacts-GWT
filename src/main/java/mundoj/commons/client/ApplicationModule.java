@@ -1,4 +1,4 @@
-package mundoj.contacts.client;
+package mundoj.commons.client;
 
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityManager;

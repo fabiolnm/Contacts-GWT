@@ -4,10 +4,10 @@ import java.util.List;
 
 import com.google.gwt.user.client.Window;
 
-import mundoj.contacts.client.JsonRequest;
+import mundoj.commons.client.JsonRequest;
+import mundoj.commons.client.ServiceCallback;
 import mundoj.contacts.domain.ContactJso;
 import mundoj.contacts.domain.IContact;
-import mundoj.contacts.domain.ServiceCallback;
 
 public class SearchContactsServiceJsonImpl implements SearchContactsService {
 	private JsonRequest currentRequest;

@@ -1,8 +1,8 @@
 package mundoj.contacts.domain.edit;
 
-import mundoj.contacts.client.JsonRequest;
+import mundoj.commons.client.JsonRequest;
+import mundoj.commons.client.ServiceCallback;
 import mundoj.contacts.domain.ContactJso;
-import mundoj.contacts.domain.ServiceCallback;
 
 import com.google.gwt.user.client.Window;
 
