@@ -2,6 +2,7 @@ package mundoj.contacts.client;
 
 import javax.inject.Named;
 
+
 import com.google.gwt.activity.shared.ActivityManager;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -13,12 +14,12 @@ import com.google.gwt.user.client.ui.SimplePanel;
 
 public class Application implements EntryPoint {
 	@GinModules({
-		ApplicationModule.class, ServiceModule.class
+		ApplicationModule.class, ContactsModule.class
 	})
 	public interface Injector extends Ginjector {
 		ActivityManager activityManager();
 
-		@Named(ApplicationModule.CONTACTS_HISTORY_HANDLER)
+		@Named(ContactsModule.CONTACTS_HISTORY_HANDLER)
 		PlaceHistoryHandler historyHandler();
 	}
 	private Injector injector = GWT.create(Injector.class);
